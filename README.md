@@ -74,7 +74,7 @@ Modelado de tópicos con BERTopic + sentence-transformers sobre una muestra de 2
 
 
 
-## Cómo reproducir
+## Cómo reproducir el repositorio
  
 1. Clonar el repositorio y ubicar `training.1600000.processed.noemoticon.csv` en `Data/`.
 2. Ejecutar los notebooks del pipeline principal, ubicados en `Notebooks/`, en orden: `01` → `02` → `03` → `04_Modelopreentrenado_GloVe`. Cada uno crea automáticamente las carpetas de salida que necesita (`Preprocesamiento/`, `Clean/`, `Vectorización/`, `Modelos/`) si no existen. Es importante el orden, ya que, por ejemplo.. el notebook `04_Modelopreentrenado_GloVe` requiere que `03` se haya ejecutado previamente, ya que reutiliza los modelos y el accuracy de TextBlob guardados en `Modelos/`.
