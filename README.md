@@ -28,7 +28,6 @@ El repositorio contiene un proyecto de NLP orientado al análisis de sentimiento
 │   ├── logreg_tfidf.pkl              # Regresión Logística + TF-IDF
 │   ├── nbayes_bow.pkl                # Naive Bayes + BoW
 │   ├── logreg_embeddings.pkl         # Regresión Logística + GloVe
-│   ├── lgbm_embeddings.pkl           # LightGBM + GloVe
 │   └── textblob_accuracy.pkl         # Accuracy de TextBlob (Para la comparación final)
 │
 └── Notebooks/
@@ -36,7 +35,7 @@ El repositorio contiene un proyecto de NLP orientado al análisis de sentimiento
     ├── 02_Vectorización.ipynb
     ├── 03_Modelos.ipynb
     ├── 04_Modelopreentrenado_GloVe.ipynb
-    └── 04.1_Topicos.ipynb
+    └── 05_Bonus_Topicos.ipynb
 ```
 ## Descripción de cada notebook
 
@@ -52,7 +51,7 @@ Entrena Regresión Logística + TF-IDF y Naive Bayes +BoW, analiza sus palabras 
 ### `04_Modelopreentrenado_GloVe.ipynb`
 Representa cada tweet como el promedio de embeddings GloVe ponderado por TF-IDF; entrena Regresión Logística y LightGBM sobre esa representación. Cierra con la comparación final de los cinco modelos del proyecto.
 
-### `04.1_Topicos.ipynb` (Bonus exploratorio)
+### `05_Bonus_Topicos.ipynb` (Bonus exploratorio)
 Modelado de tópicos con BERTopic + sentence-transformers sobre una muestra de 250.000 tweets, cruzando cada tópico con su sentimiento. Exploratorio e independiente del pipeline de clasificación de sentimientos de los notebook 01 a 04.
 
 ## Conclusiones generales del análisis de sentimiento
@@ -60,7 +59,7 @@ Modelado de tópicos con BERTopic + sentence-transformers sobre una muestra de 2
 - **El corpus está perfectamente balanceado** (50/50), por lo que no fue necesario aplicar resampling ni ponderación de clases.
 - **La longitud del tweet no es un buen discriminador de sentimiento** por sí sola; las distribuciones son casi idénticas entre clases.
 - **El modelo más simple fue el mejor:** Regresión Logística + TF-IDF alcanzó el mayor accuracy en test (~0.80), seguido de cerca por Naive Bayes + BoW (~0.77).
-- **Los embeddings pre-entrenados (GloVe) rindieron peor que los enfoques simples** (~0.73 tanto con Regresión Logística como con LightGBM), pese a ser la aproximación más sofisticada. Se creer que el hecho de promediar embeddings palabra por palabra pierde información de orden y negación (por ejemplo, "not good" ≠ "good"), mientras que TF-IDF con bigramas sí la captura parcialmente; además, GloVe-Twitter es un embedding genérico no ajustado a esta tarea ni a este corpus específico.
+- **Los embeddings pre-entrenados (GloVe) rindieron peor que los enfoques simples** (~0.73 tanto con Regresión Logística), pese a ser la aproximación más sofisticada, se cree que el hecho de promediar embeddings con IDF palabra por palabra pierde información de orden y negación (por ejemplo, "not good" ≠ "good"), mientras que TF-IDF con bigramas sí la captura parcialmente; además, GloVe-Twitter es un embedding genérico no ajustado a esta tarea ni a este corpus específico.
 - **TextBlob, el modelo de reglas/léxico genérico, obtuvo el desempeño más bajo** (~0.62), como era esperable al no estar entrenado sobre datos ni ajustado al lenguaje informal de Twitter.
 - En conjunto, el proyecto muestra que lo más importante no es usar modelos complejos, sino tener una representación adecuada para la tarea. Un TF‑IDF bien ajustado al propio corpus funcionó mejor que un modelo basado en reglas preentrenado y que los embeddings GloVe promediados.
 
