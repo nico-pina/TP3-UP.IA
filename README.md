@@ -6,7 +6,7 @@ El repositorio contiene un proyecto de NLP orientado al análisis de sentimiento
 ## Estructura del repositorio
 ```
 ├── Data/
-│   └── training.1600000.processed.noemoticon.csv   # Dataset original (Sentiment140)
+│   └── training.1600000.processed.noemoticon.csv   # Dataset con 1.6mill de tweets
 │
 ├── Preprocesamiento/
 │   └── training_limpio.csv                          # Dataset tras limpieza (notebook 01)
